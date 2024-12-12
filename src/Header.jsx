@@ -4,11 +4,14 @@ import { LogoutLink } from "./LogoutLink";
 export function Header() {
   return (
     <header>
-      <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark w-100">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          {/* Brand Name */}
+          <Link className="navbar-brand" to="/">
             Mini Capstone
-          </a>
+          </Link>
+
+          {/* Hamburger Menu for Mobile */}
           <button
             className="navbar-toggler"
             type="button"
@@ -20,7 +23,10 @@ export function Header() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
+          {/* Navbar Content */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            {/* Navbar Links */}
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">
@@ -29,29 +35,43 @@ export function Header() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/products">
-                  All products
+                  All Products
                 </Link>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/products/new">
-                  New product
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Signup
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <LogoutLink />
-              </li>
+              {localStorage.email === undefined ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/signup">
+                      Signup
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/carted_products">
+                      Shopping Cart
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/products/new">
+                      New Product
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <LogoutLink className="nav-link" />
+                  </li>
+                </>
+              )}
             </ul>
-            <form className="d-flex" role="search">
+
+            {/* Search Form - Aligned to the Right */}
+            <form className="d-flex ms-auto" role="search">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success" type="submit">
                 Search

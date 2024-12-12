@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export function ProductsNew({ onCreate }) {
+  const [name, setName] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -11,7 +15,14 @@ export function ProductsNew({ onCreate }) {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" />
+          <input
+            value={name}
+            onChange={(event) => setName(event.target.value.slice(0, 20))}
+            type="text"
+            id="name"
+            name="name"
+          />
+          <small>{20 - name.length} characters remaining</small>
         </div>
         <div>
           <label htmlFor="description">Description:</label>

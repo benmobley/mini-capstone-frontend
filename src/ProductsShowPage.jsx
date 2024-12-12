@@ -19,9 +19,21 @@ export function ProductsShowPage() {
     });
   };
 
+  const handleAddToCart = (params) => {
+    axios.post("/carted_products.json", params).then((response) => {
+      console.log(response);
+      navigate("/products");
+    });
+  };
+
   return (
     <main className="container">
-      <ProductsShow product={currentProduct} onEdit={handleEdit} onDestroy={handleDestroy} />
+      <ProductsShow
+        product={currentProduct}
+        onEdit={handleEdit}
+        onDestroy={handleDestroy}
+        onAddToCart={handleAddToCart}
+      />
     </main>
   );
 }

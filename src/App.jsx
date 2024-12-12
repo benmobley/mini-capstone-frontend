@@ -10,8 +10,11 @@ import { ProductsNewPage } from "./ProductsNewPage";
 import { ProductsIndexPage } from "./ProductsIndexPage";
 import { ProductsShowPage } from "./ProductsShowPage";
 import { ProductsEditPage } from "./ProductsEditPage";
+import { CartedProductsIndexPage } from "./CartedProductsIndexPage";
 import { SignupPage } from "./SignupPage";
 import { LoginPage } from "./LoginPage";
+import { OrdersShowPage } from "./OrdersShowPage";
+import { OrdersIndexPage } from "./OrdersIndexPage";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
@@ -45,6 +48,21 @@ const router = createBrowserRouter([
         path: "/products/:id/edit",
         element: <ProductsEditPage />,
         loader: ({ params }) => axios.get(`/products/${params.id}.json`).then((response) => response.data),
+      },
+      {
+        path: "/carted_products",
+        element: <CartedProductsIndexPage />,
+        loader: () => axios.get("/carted_products.json").then((response) => response.data),
+      },
+      {
+        path: "/orders",
+        element: <OrdersIndexPage />,
+        loader: () => axios.get("/orders.json").then((response) => response.data),
+      },
+      {
+        path: "/orders/:id",
+        element: <OrdersShowPage />,
+        loader: ({ params }) => axios.get(`/orders/${params.id}.json`).then((response) => response.data),
       },
       {
         path: "/signup",
